@@ -97,8 +97,11 @@ describe("Clase GameBoardSpec", function(){
 
 	it ("collide", function(){
 		var mycollide = new GameBoard();
-		
-		mycollide.collide();	
+		var o1 = {w:2,h:2,x:0,y:0};
+		var o2 = {w:2,h:2,x:4,y:4};
+		runs( function() {
+			expect(mycollide.collide(o1,o2)).toBeFalsy();
+		});	
 	});
 });
 
