@@ -26,7 +26,7 @@ describe("Clase GameBoardSpec", function(){
 	expect(GameBoard.add()).toHaveBeenCalled;
 	});
 */
-	it("remove", function(){
+	it("remove + resetRemoved + finalizeRemoved", function(){
 		var pos1 = "pos1";
 		var myremove = new GameBoard();
 		
@@ -63,11 +63,18 @@ describe("Clase GameBoardSpec", function(){
 		mydetect.detect(tdetect);
 	
 		expect(mydetect.detect).toHaveBeenCalledWith(tdetect);
-		expect(mydetect.detect).not.toBeFalsy(); //Preguntarselo a Quan		
+		expect(mydetect.detect).not.toBeFalsy(); 	
 	});
 
-/*	it ("step", function(){
-	});*/
+	it ("step", function(){
+		var mystep = new GameBoard();
+		var dt = 30 / 1000;
+		
+		spyOn(mystep, "iterate");
+		mystep.step(dt);
+	
+		expect(mystep.iterate).toHaveBeenCalledWith('step',dt);		
+	});
 
 /*	it ("draw", function(){
 	});*/
