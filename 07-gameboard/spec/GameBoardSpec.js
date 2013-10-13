@@ -52,8 +52,19 @@ describe("Clase GameBoardSpec", function(){
 		expect(myiterate.iterate).toHaveBeenCalled();		
 	});
 
-/*	it ("detect", function(){
-	});*/
+	it ("detect", function(){
+		var mydetect = new GameBoard();
+		var p1 = "p1"
+		var tdetect = function(){
+			return true;
+		}
+		mydetect.add(p1);	
+		spyOn(mydetect, "detect");
+		mydetect.detect(tdetect);
+	
+		expect(mydetect.detect).toHaveBeenCalledWith(tdetect);
+		expect(mydetect.detect).not.toBeFalsy(); //Preguntarselo a Quan		
+	});
 
 /*	it ("step", function(){
 	});*/
