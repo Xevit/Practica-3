@@ -63,7 +63,7 @@ describe("Clase GameBoardSpec", function(){
 		mydetect.detect(tdetect);
 	
 		expect(mydetect.detect).toHaveBeenCalledWith(tdetect);
-		expect(mydetect.detect).not.toBeFalsy();		
+		expect(mydetect.detect).not.toBeFalsy(); //Preguntarselo a Quan		
 	});
 
 /*	it ("step", function(){
