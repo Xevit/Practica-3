@@ -76,8 +76,14 @@ describe("Clase GameBoardSpec", function(){
 		expect(mystep.iterate).toHaveBeenCalledWith('step',dt);		
 	});
 
-/*	it("draw", function(){
-	});*/	
+	it ("draw", function(){
+		var mydraw = new GameBoard();
+		
+		spyOn(mydraw, "iterate");
+		mydraw.draw(ctx);
+		
+		expect(mydraw.iterate).toHaveBeenCalledWith('draw',ctx);
+	});
 
 /*	it ("overlap", function(){
 	});*/
