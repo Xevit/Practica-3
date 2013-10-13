@@ -13,10 +13,10 @@ describe("Clase GameBoardSpec", function(){
     });
 
 	it("add", function(){
-		var objeto = ["hola"];
+		var objeto = "hola";
 		var miobjeto = new GameBoard();
 		miobjeto.add(objeto);
-		expect(miobjeto.objects).toEqual("hola");
+		expect(miobjeto.objects).toEqual(["hola"]);
 	});
 /*
 	it ("add", function(){
@@ -26,13 +26,58 @@ describe("Clase GameBoardSpec", function(){
 	expect(GameBoard.add()).toHaveBeenCalled;
 	});
 */
-/*	it("iterate", function(){
-		spyOn(GameBoard, "iterate");
-		var myiterate = new GameBoard();
-		var funcName = [];
-		myiterate.iterate(funcName);
-
-		expect(GameBoard.iterate)
+	it("remove", function(){
+		var pos1 = "pos1";
+		var myremove = new GameBoard();
+		
+		myremove.add(pos1);
+		
+		myremove.resetRemoved();
+		myremove.remove(pos1);
+		myremove.finalizeRemoved();		
+		
+		expect(myremove.objects[0]).toEqual(undefined); 
+		//Preguntar porque no se puede hacer con un:
+		// spyOn(myremove, "resetRemoved");)		
+		// expect(myremove.resetRemoved()).toHaveBeenCalled();
+		// expect(myremove.finalizeRemoved()).toHaveBeenCalled();
 	});
-*/
+	
+	it ("iterate", function(){
+		var myiterate = new GameBoard();
+		spyOn(myiterate, "iterate"); // ¿porqué aquí se puede llamar?
+
+		myiterate.iterate("remove", ctx);
+
+		expect(myiterate.iterate).toHaveBeenCalled();		
+	});
+
+/*	it ("detect", function(){
+	});*/
+
+/*	it ("step", function(){
+	});*/
+
+/*	it ("draw", function(){
+	});*/
+
+/*	it ("overlap", function(){
+	});*/
+
+/*	it ("collide", function(){
+	});*/
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+

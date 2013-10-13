@@ -26,13 +26,52 @@ describe("Clase GameBoardSpec", function(){
 	expect(GameBoard.add()).toHaveBeenCalled;
 	});
 */
-/*	it("iterate", function(){
-		spyOn(GameBoard, "iterate");
-		var myiterate = new GameBoard();
-		var funcName = [];
-		myiterate.iterate(funcName);
-
-		expect(GameBoard.iterate)
+	it("remove", function(){
+		var pos1 = "pos1";
+		var myremove = new GameBoard();
+		
+		myremove.add(pos1);
+		
+		myremove.resetRemoved();
+		myremove.remove(pos1);
+		myremove.finalizeRemoved();		
+		
+		expect(myremove.objects[0]).toEqual(undefined); 
+		//Preguntar porque no se puede hacer con un:
+		// spyOn(myremove, "resetRemoved");)		
+		// expect(myremove.resetRemoved()).toHaveBeenCalled();
+		// expect(myremove.finalizeRemoved()).toHaveBeenCalled();
 	});
-*/
+	
+/* it("iterate", function(){
+	});*/
+
+/*	it ("detect", function(){
+	});*/
+
+/*	it ("step", function(){
+	});*/
+
+/*	it ("draw", function(){
+	});*/
+
+/*	it ("overlap", function(){
+	});*/
+
+/*	it ("collide", function(){
+	});*/
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
