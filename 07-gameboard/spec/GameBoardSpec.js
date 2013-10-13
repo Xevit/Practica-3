@@ -43,8 +43,14 @@ describe("Clase GameBoardSpec", function(){
 		// expect(myremove.finalizeRemoved()).toHaveBeenCalled();
 	});
 	
-/* it("iterate", function(){
-	});*/
+	it ("iterate", function(){
+		var myiterate = new GameBoard();
+		spyOn(myiterate, "iterate"); // ¿porqué aquí se puede llamar?
+
+		myiterate.iterate("remove", ctx);
+
+		expect(myiterate.iterate).toHaveBeenCalled();		
+	});
 
 /*	it ("detect", function(){
 	});*/
