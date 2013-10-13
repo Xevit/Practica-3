@@ -85,11 +85,21 @@ describe("Clase GameBoardSpec", function(){
 		expect(mydraw.iterate).toHaveBeenCalledWith('draw',ctx);
 	});
 
-/*	it ("overlap", function(){
-	});*/
+	it ("overlap", function(){
+		var myoverlap = new GameBoard();
+		var o1 = {w:2,h:2,x:0,y:0};
+		var o2 = {w:2,h:2,x:4,y:4};
 
-/*	it ("collide", function(){
-	});*/
+		runs( function() {
+			expect(myoverlap.overlap(o1,o2)).toBeFalsy();
+		});		
+	});
+
+	it ("collide", function(){
+		var mycollide = new GameBoard();
+		
+		mycollide.collide();	
+	});
 });
 
 
