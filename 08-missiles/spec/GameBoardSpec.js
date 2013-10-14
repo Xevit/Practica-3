@@ -1,42 +1,120 @@
+describe("Clase GameBoardSpec", function(){
+	var canvas, ctx;
+
+    beforeEach(function(){
+	loadFixtures('index.html');
+
+	canvas = $('#game')[0];
+	expect(canvas).toExist();
+
+	ctx = canvas.getContext('2d');
+	expect(ctx).toBeDefined();
+
+    });
+
+	it("add", function(){
+		var objeto = "hola";
+		var miobjeto = new GameBoard();
+		miobjeto.add(objeto);
+		expect(miobjeto.objects).toEqual(["hola"]);
+	});
 /*
-
-
-En el anterior prototipo, el objeto Game permite gestionar una pila de
-tableros (boards). Los tres campos de estrellas, la pantalla de inicio
-y el sprite de la nave del jugador se añaden como tableros
-independientes para que Game pueda ejecutar sus métodos step() y
-draw() periódicamente desde su método loop(). Sin embargo los tableros
-no pueden interaccionar entre sí. Resulta difícil con esta
-arquitectura pensar en cómo podría por ejemplo detectarse la colisión
-de una nave enemiga con la nave del jugador, o cómo podría detectarse
-si un disparo de colisiona con una nave.
-
-Este es precisamente el requisito que se ha identificado para este
-prototipo: gestionar la interacción entre los elementos del
-juego. Piensa en esta clase como un tablero de juegos de mesa, sobre
-el que se disponen los elementos del juego (fichas, cartas, etc.). En
-este caso serán naves enemigas, nave del jugador y disparos los
-elementos del juego. Para Game, GameBoard será un tablero más, por lo
-que deberá ofrecer los métodos step() y draw(), y será responsable de
-mostrar todos los objetos que contenga cuando Game llame a estos
-métodos.
-
-
-
-Especificación: GameBoard debe
-
-- mantener una colección de objetos a la que se pueden añadir y de la
-  que se pueden eliminar sprites
-
-- interacción con Game: cuando reciba los métodos step() y draw() debe
-  ocuparse de que se ejecuten estos métodos en todos los objetos que
-  contenga.
-
-- debe detectar la colisión entre objetos. Querremos que los disparos
-  de la nave del jugador detecten cuándo colisionan con una nave
-  enemiga, que una nave enemiga detecte si colisiona con la nave del
-  jugador, que un disparo de la nave enemiga detecte si colisiona con
-  la nave del jugador,... necesitamos saber de qué tipo es cada objeto.
-
-
+	it ("add", function(){
+	spyOn(GameBoard, "add");
+	var miobjeto = new GameBoard;
+	miobjeto.add();
+	expect(GameBoard.add()).toHaveBeenCalled;
+	});
 */
+	it("remove + resetRemoved + finalizeRemoved", function(){
+		var pos1 = "pos1";
+		var myremove = new GameBoard();
+		
+		myremove.add(pos1);
+		
+		myremove.resetRemoved();
+		myremove.remove(pos1);
+		myremove.finalizeRemoved();		
+		
+		expect(myremove.objects[0]).toEqual(undefined); 
+		//Preguntar porque no se puede hacer con un:
+		// spyOn(myremove, "resetRemoved");)		
+		// expect(myremove.resetRemoved()).toHaveBeenCalled();
+		// expect(myremove.finalizeRemoved()).toHaveBeenCalled();
+	});
+	
+	it ("iterate", function(){
+		var myiterate = new GameBoard();
+		spyOn(myiterate, "iterate"); // Â¿porquÃ© aquÃ­ se puede llamar?
+
+		myiterate.iterate("remove", ctx);
+
+		expect(myiterate.iterate).toHaveBeenCalled();		
+	});
+
+	it ("detect", function(){
+		var mydetect = new GameBoard();
+		var p1 = "p1"
+		var tdetect = function(){
+			return true;
+		}
+		mydetect.add(p1);	
+		spyOn(mydetect, "detect");
+		mydetect.detect(tdetect);
+	
+		expect(mydetect.detect).toHaveBeenCalledWith(tdetect);
+		expect(mydetect.detect).not.toBeFalsy(); 	
+	});
+
+	it ("step", function(){
+		var mystep = new GameBoard();
+		var dt = 30 / 1000;
+		
+		spyOn(mystep, "iterate");
+		mystep.step(dt);
+	
+		expect(mystep.iterate).toHaveBeenCalledWith('step',dt);		
+	});
+
+	it ("draw", function(){
+		var mydraw = new GameBoard();
+		
+		spyOn(mydraw, "iterate");
+		mydraw.draw(ctx);
+		
+		expect(mydraw.iterate).toHaveBeenCalledWith('draw',ctx);
+	});
+
+	it ("overlap", function(){
+		var myoverlap = new GameBoard();
+		var o1 = {w:2,h:2,x:0,y:0};
+		var o2 = {w:2,h:2,x:4,y:4};
+
+		runs( function() {
+			expect(myoverlap.overlap(o1,o2)).toBeFalsy();
+		});		
+	});
+
+	it ("collide", function(){
+		var mycollide = new GameBoard();
+		var o1 = {w:2,h:2,x:0,y:0};
+		var o2 = {w:2,h:2,x:4,y:4};
+		runs( function() {
+			expect(mycollide.collide(o1,o2)).toBeFalsy();
+		});	
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+

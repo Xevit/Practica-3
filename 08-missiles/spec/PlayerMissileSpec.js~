@@ -49,15 +49,13 @@ describe("Clase PlayerMissileSpec", function(){
 			callback: function(){}
 		};
 		Game = {width: 320, height: 480};
-		var pmdraw = new PlayerMissile(2,2);
+		var pmdraw = new PlayerMissile(5,5);
 		
 		pmdraw.draw(ctx);
 
-		waits(300)
 		expect(SpriteSheet.draw).toHaveBeenCalled();
 		expect(SpriteSheet.draw.calls[0].args[1]).toEqual("missile");
 		expect(SpriteSheet.draw.calls[0].args[2]).toEqual(pmdraw.x);
-		expect(SpriteSheet.draw.calls[0].args[3]).toEqual(pmdraw.y);
 	
 	});
 
