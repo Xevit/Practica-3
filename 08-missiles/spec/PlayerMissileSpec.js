@@ -53,7 +53,7 @@ describe("Clase PlayerMissileSpec", function(){
 		
 		pmdraw.draw(ctx);
 
-		waits(300)
+		waits(300);
 		expect(SpriteSheet.draw).toHaveBeenCalled();
 		expect(SpriteSheet.draw.calls[0].args[1]).toEqual("missile");
 		expect(SpriteSheet.draw.calls[0].args[2]).toEqual(pmdraw.x);
@@ -62,8 +62,14 @@ describe("Clase PlayerMissileSpec", function(){
 	});
 
 
-/*	it ("PlayerMissile.step", function(){
-
+	it ("PlayerMissile.step", function(){
+		var game = new GameBoard();
+		var pmstep = new PlayerMissile(2,2);
+		game.add(pmstep);
+		spyOn(game, "remove");
+		pmstep.step(2);
+			
+		expect(game.remove).toHaveBeenCalled();
 	});
-*/
+
 });
